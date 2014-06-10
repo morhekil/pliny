@@ -1,3 +1,9 @@
+# Fork of Pliny with no DB dependencies
+
+This is a fork of awesome [Pliny](https://github.com/interagent/pliny) that
+removes all databases dependencies. It allows you to generate API skeleton
+that you can use with any DB you, or without DB backing at all.
+
 # Pliny
 
 Opinionated template Sinatra app for writing excellent APIs in Ruby.
@@ -23,18 +29,11 @@ And gems/helpers to tie these together and support operations:
 - [Request IDs](lib/pliny/middleware/request_id.rb)
 - [RequestStore](http://brandur.org/antipatterns), thread safe option to store data with the current request
 - [RR](https://github.com/rr/rr/blob/master/doc/03_api_overview.md) for amazing mocks and stubs
-- [Sequel](http://sequel.jeremyevans.net/) for ORM
-- [Sequel-PG](https://github.com/jeremyevans/sequel_pg) because we don't like mysql
 - [Versioning](lib/pliny/middleware/versioning.rb) to allow versioning your API in the HTTP Accept header
 
 ## Getting started
 
-First make sure the following is installed:
-
-* [Postgres](http://www.postgresql.org/)
-    * The [uuid-ossp](http://www.postgresql.org/docs/9.3/static/uuid-ossp.html) module for Postgres
-
-Then install the gem:
+Install the gem:
 
 ```bash
 $ gem install pliny
@@ -52,7 +51,6 @@ Pliny also bundles some generators to help you get started:
 ```bash
 $ bundle exec pliny-generate model artist
 created model file ./lib/models/artist.rb
-created migration ./db/migrate/1395873224_create_artist.rb
 created test ./test/models/artist_test.rb
 
 $ bundle exec pliny-generate mediator artists/creator
@@ -66,9 +64,6 @@ add the following to lib/routes.rb:
   mount Endpoints::Artists
 created test ./spec/endpoints/artists_spec.rb
 created test ./spec/acceptance/artists_spec.rb
-
-$ bundle exec pliny-generate migration fix_something
-created migration ./db/migrate/1395873228_fix_something.rb
 
 $ bundle exec pliny-generate schema artists
 created schema file ./docs/schema/schemata/artist.yaml

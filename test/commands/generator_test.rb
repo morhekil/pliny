@@ -93,10 +93,6 @@ describe Pliny::Commands::Generator do
         @gen.run!
       end
 
-      it "creates a migration" do
-        assert File.exists?("db/migrate/#{@t.to_i}_create_artists.rb")
-      end
-
       it "creates the actual model" do
         assert File.exists?("lib/models/artist.rb")
       end
@@ -130,10 +126,6 @@ describe Pliny::Commands::Generator do
 
       it "creates an endpoint acceptance test" do
         assert File.exists?("spec/acceptance/artists_spec.rb")
-      end
-
-      it "creates a migration" do
-        assert File.exists?("db/migrate/#{@t.to_i}_create_artists.rb")
       end
 
       it "creates the actual model" do

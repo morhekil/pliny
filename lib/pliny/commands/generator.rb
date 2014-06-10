@@ -33,11 +33,8 @@ module Pliny::Commands
       when "mediator"
         create_mediator
         create_mediator_test
-      when "migration"
-        create_migration
       when "model"
         create_model
-        create_model_migration
         create_model_test
         create_serializer
         create_serializer_test
@@ -46,7 +43,6 @@ module Pliny::Commands
         create_endpoint_test
         create_endpoint_acceptance_test(scaffold: true)
         create_model
-        create_model_migration
         create_model_test
         create_schema
         rebuild_schema
@@ -140,23 +136,10 @@ module Pliny::Commands
       display "created test #{test}"
     end
 
-    def create_migration
-      migration = "./db/migrate/#{Time.now.to_i}_#{name}.rb"
-      render_template("migration.erb", migration)
-      display "created migration #{migration}"
-    end
-
     def create_model
       model = "./lib/models/#{name}.rb"
       render_template("model.erb", model, singular_class_name: singular_class_name)
       display "created model file #{model}"
-    end
-
-    def create_model_migration
-      migration = "./db/migrate/#{Time.now.to_i}_create_#{table_name}.rb"
-      render_template("model_migration.erb", migration,
-        table_name: table_name)
-      display "created migration #{migration}"
     end
 
     def create_model_test
